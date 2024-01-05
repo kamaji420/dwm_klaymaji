@@ -3,7 +3,7 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const int startwithgaps	    = 1;	/* 1 means gaps are used by default */
-static const unsigned int gappx     = 20;       /* default gap between windows in pixels */
+static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -64,37 +64,37 @@ static const char *termcmd[]  = { "kitty", NULL };
 
 #include "movestack.c"
 static const Key keys[] = {
-	/* modifier                     key           function        argument */
-	{ MODKEY,                       XK_r,         spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_t,         spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,         togglebar,      {0} },
-	{ MODKEY,                       XK_Down,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Up,        focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Left,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_Right,     incnmaster,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_Left,      setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_Right,     setmfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,           XK_Up,        movestack,      {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_Down,      movestack,      {.i = -1 } },
-	{ MODKEY,                       XK_Return,    zoom,           {0} },
-	{ MODKEY,                       XK_Tab,       view,           {0} },
-	{ MODKEY,                       XK_F4,        killclient,     {0} },
-	{ MODKEY,                       XK_p,         setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,         setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,         setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,     setlayout,      {0} },
-	{ MODKEY,                       XK_KP_Delete, togglefloating, {0} },
-	{ MODKEY,                       XK_KP_Insert, togglefullscr,  {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                       XK_minus,  setgaps,        {.i = -5 } },
-	{ MODKEY,                       XK_equal,  setgaps,        {.i = +5 } },
-	{ MODKEY|ShiftMask,             XK_minus,  setgaps,        {.i = GAP_RESET } },
-	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = GAP_TOGGLE} },
+	/* modifier                     key             function        argument */
+	{ MODKEY,                       XK_r,           spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_t,           spawn,          {.v = termcmd } },
+	{ MODKEY,                       XK_b,           togglebar,      {0} },
+	{ MODKEY,                       XK_Down,        focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_Up,          focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_Left,        incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_Right,       incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_Left,        setmfact,       {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_Right,       setmfact,       {.f = +0.05} },
+	{ MODKEY|ControlMask,           XK_Down,        movestack,      {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_Up,          movestack,      {.i = -1 } },
+	{ MODKEY,                       XK_Return,      zoom,           {0} },
+	{ MODKEY,                       XK_Tab,         view,           {0} },
+	{ MODKEY|ControlMask,           XK_d,           killclient,     {0} },
+	{ MODKEY|ControlMask,           XK_KP_Divide,   setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ControlMask,           XK_KP_Multiply, setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ControlMask,           XK_KP_Subtract, setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                       XK_space,       setlayout,      {0} },
+	{ MODKEY,                       XK_KP_Delete,   togglefloating, {0} },
+	{ MODKEY,                       XK_KP_Insert,   togglefullscr,  {0} },
+	{ MODKEY,                       XK_0,           view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,             XK_0,           tag,            {.ui = ~0 } },
+	{ MODKEY,                       XK_comma,       focusmon,       {.i = -1 } },
+	{ MODKEY,                       XK_period,      focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_comma,       tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_period,      tagmon,         {.i = +1 } },
+	{ MODKEY,                       XK_KP_Subtract, setgaps,        {.i = -5 } },
+	{ MODKEY,                       XK_KP_Add,      setgaps,        {.i = +5 } },
+	{ MODKEY,                       XK_KP_Divide,   setgaps,        {.i = GAP_RESET } },
+	{ MODKEY,                       XK_KP_Multiply, setgaps,        {.i = GAP_TOGGLE} },
 	TAGKEYS(                        XK_KP_End,                 0)
 	TAGKEYS(                        XK_KP_Down,                1)
 	TAGKEYS(                        XK_KP_Next,                2)
