@@ -2,6 +2,7 @@
 
 /* constants */
 #define TERMINAL "kitty"
+#define BROWSER "io.gitlab.librewolf-community"
 
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -23,7 +24,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -67,20 +68,22 @@ static const char plugstart[] = "p";
 
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_pink, "-sb", col_purple, "-sf", col_gray1, "-i", "-p", dmenuprompt, NULL };
+static const char *termcmd [] = { TERMINAL, NULL };
 static const char *pmixer[] = { TERMINAL, "pulsemixer", NULL };
 static const char *n3[] = { TERMINAL, "nnn", "-aCDEHU", "-T", n3sort, "-P", plugstart, NULL };
+static const char *webbrowser[] = { BROWSER, "~/Downloads/tenpo_files/tenpo.html", NULL };
 static const char *up_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%",   NULL };
 static const char *down_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%",   NULL };
 static const char *mute_vol[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle", NULL };
 
-#include "movestack.c"
 #include <X11/XF86keysym.h>
 static const Key keys[] = {
 	/* modifier                     key                      function        argument */
 	{ MODKEY,                       XK_r,                    spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_t,                    spawn,          {.v = TERMINAL } },
+	{ MODKEY,                       XK_t,                    spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_v,                    spawn,          {.v = pmixer } },
 	{ MODKEY,                       XK_e,                    spawn,          {.v = n3 } },
+	{ MODKEY,                       XK_w,                    spawn,          {.v = webbrowser } },
 	{ MODKEY,                       XK_b,                    togglebar,      {0} },
 	{ MODKEY,                       XK_Down,                 focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Up,                   focusstack,     {.i = -1 } },
@@ -88,8 +91,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Right,                incnmaster,     {.i = -1 } },
 	{ MODKEY|ControlMask,           XK_Left,                 setmfact,       {.f = -0.05} },
 	{ MODKEY|ControlMask,           XK_Right,                setmfact,       {.f = +0.05} },
-	{ MODKEY|ControlMask,           XK_Down,                 movestack,      {.i = +1 } },
-	{ MODKEY|ControlMask,           XK_Up,                   movestack,      {.i = -1 } },
 	{ MODKEY,                       XK_space,                zoom,           {0} },
 	{ MODKEY,                       XK_Tab,                  view,           {0} },
 	{ MODKEY,                       XK_d,                    killclient,     {0} },
@@ -98,8 +99,8 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_KP_Subtract,          setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_KP_Delete,            togglefloating, {0} },
 	{ MODKEY,                       XK_KP_Insert,            togglefullscr,  {0} },
-	{ MODKEY,                       XK_0,                    view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,                    tag,            {.ui = ~0 } },
+	{ MODKEY|ControlMask,           XK_KP_Delete,            view,           {.ui = ~0 } },
+	{ MODKEY|ControlMask,           XK_KP_Insert,            tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,                focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period,               focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,                tagmon,         {.i = -1 } },
@@ -117,6 +118,9 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_KP_Left,                3)
 	TAGKEYS(                        XK_KP_Begin,               4)
 	TAGKEYS(                        XK_KP_Right,               5)
+	TAGKEYS(                        XK_KP_Home,                6)
+	TAGKEYS(                        XK_KP_Up,                  7)
+	TAGKEYS(                        XK_KP_Prior,               8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
