@@ -1,18 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
 /* constants */
-#define TERMINAL "kitty"
+#define TERMINAL "urxvt"
 #define BROWSER "io.gitlab.librewolf-community"
-
-/* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+/* appearance */ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const int startwithgaps	    = 1;	/* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "monospace:size=10" };
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[]          = { "Terminess Nerd Font:size=13", "Symbols Nerd Font" };
+static const char dmenufont[]       = "Terminess Nerd Font:size=13";
 static const char col_gray1[]       = "#362c34";
 static const char col_gray2[]       = "#f3c6c6";
 static const char col_purple[]      = "#d9a2fb";
@@ -24,8 +22,8 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-
+static const char *tags[] = { "", "", "", "󰊗", "󰄛", "", "󰗃", "󰵅", "󰎆" };
+static const char *defaulttagapps[] = { TERMINAL, BROWSER, "steam", "lutris", "NULL", "org.gimp.gimp", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "com.github.iwalton3.jellyfin-media-player", NULL }; 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -44,8 +42,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "[]=",      tile },    /* first entry is default */
-	{ "><>",      NULL },    /* no layout function means floating behavior */
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
 };
 
@@ -84,13 +82,14 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_v,                    spawn,          {.v = pmixer } },
 	{ MODKEY,                       XK_e,                    spawn,          {.v = n3 } },
 	{ MODKEY,                       XK_w,                    spawn,          {.v = webbrowser } },
+	{ MODKEY,                       XK_s,                    spawndefault,   {0} },
 	{ MODKEY,                       XK_b,                    togglebar,      {0} },
-	{ MODKEY,                       XK_Down,                 focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Up,                   focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Left,                 incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_Right,                incnmaster,     {.i = -1 } },
-	{ MODKEY|ControlMask,           XK_Left,                 setmfact,       {.f = -0.05} },
-	{ MODKEY|ControlMask,           XK_Right,                setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_j,                    focusstack,     {.i = +1 } },
+	{ MODKEY,                       XK_k,                    focusstack,     {.i = -1 } },
+	{ MODKEY,                       XK_h,                    incnmaster,     {.i = +1 } },
+	{ MODKEY,                       XK_l,                    incnmaster,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_h,                    setmfact,       {.f = -0.05} },
+	{ MODKEY|ControlMask,           XK_l,                    setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_space,                zoom,           {0} },
 	{ MODKEY,                       XK_Tab,                  view,           {0} },
 	{ MODKEY,                       XK_d,                    killclient,     {0} },
@@ -112,15 +111,15 @@ static const Key keys[] = {
 	{ 0,                            XF86XK_AudioMute,        spawn,          {.v = mute_vol } },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn,          {.v = down_vol } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn,          {.v = up_vol } },
-	TAGKEYS(                        XK_KP_End,                 0)
-	TAGKEYS(                        XK_KP_Down,                1)
-	TAGKEYS(                        XK_KP_Next,                2)
-	TAGKEYS(                        XK_KP_Left,                3)
-	TAGKEYS(                        XK_KP_Begin,               4)
-	TAGKEYS(                        XK_KP_Right,               5)
-	TAGKEYS(                        XK_KP_Home,                6)
-	TAGKEYS(                        XK_KP_Up,                  7)
-	TAGKEYS(                        XK_KP_Prior,               8)
+	TAGKEYS(                        XK_1,                    0)
+	TAGKEYS(                        XK_2,                    1)
+	TAGKEYS(                        XK_3,                    2)
+	TAGKEYS(                        XK_4,                    3)
+	TAGKEYS(                        XK_5,                    4)
+	TAGKEYS(                        XK_6,                    5)
+	TAGKEYS(                        XK_7,                    6)
+	TAGKEYS(                        XK_8,                    7)
+	TAGKEYS(                        XK_9,                    8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
 };
 
