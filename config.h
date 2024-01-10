@@ -3,7 +3,8 @@
 /* constants */
 #define TERMINAL "urxvt"
 #define BROWSER "io.gitlab.librewolf-community"
-/* appearance */ static const unsigned int borderpx  = 2;        /* border pixel of windows */
+/* appearance */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const int startwithgaps	    = 1;	/* 1 means gaps are used by default */
 static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
@@ -23,7 +24,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "", "", "", "󰊗", "󰄛", "", "󰗃", "󰵅", "󰎆" };
-static const char *defaulttagapps[] = { TERMINAL, BROWSER, "steam", "lutris", "NULL", "org.gimp.gimp", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "com.github.iwalton3.jellyfin-media-player", NULL }; 
+static const char *defaulttagapps[] = { TERMINAL, BROWSER, "steam", "lutris", "NULL", "org.gimp.GIMP", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "sonixd", NULL }; 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -44,7 +45,7 @@ static const Layout layouts[] = {
 	/* symbol     arrange function */
 	{ "",      tile },    /* first entry is default */
 	{ "",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+	{ "[M]",    monocle },
 };
 
 /* key definitions */
@@ -61,15 +62,16 @@ static const Layout layouts[] = {
 /* commands */
 
 static const char dmenuprompt[] = "klaymaji<3";
+static const char urxvtexec[] = "-e";
 static const char n3sort[] = "v";
-static const char plugstart[] = "p";
 
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_pink, "-sb", col_purple, "-sf", col_gray1, "-i", "-p", dmenuprompt, NULL };
 static const char *termcmd [] = { TERMINAL, NULL };
-static const char *pmixer[] = { TERMINAL, "pulsemixer", NULL };
-static const char *n3[] = { TERMINAL, "nnn", "-aCDEHU", "-T", n3sort, "-P", plugstart, NULL };
+static const char *pmixer[] = { TERMINAL, urxvtexec, "pulsemixer", NULL };
+static const char *n3[] = { TERMINAL, urxvtexec, "nnn", "-aCDEHU", "-T", n3sort, NULL };
 static const char *webbrowser[] = { BROWSER, "~/Downloads/tenpo_files/tenpo.html", NULL };
+static const char *shotgun[] = { "shotgun-selection", NULL };
 static const char *up_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%",   NULL };
 static const char *down_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%",   NULL };
 static const char *mute_vol[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle", NULL };
@@ -82,6 +84,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_v,                    spawn,          {.v = pmixer } },
 	{ MODKEY,                       XK_e,                    spawn,          {.v = n3 } },
 	{ MODKEY,                       XK_w,                    spawn,          {.v = webbrowser } },
+	{ MODKEY,                       XK_p,                    spawn,          {.v = shotgun } },
 	{ MODKEY,                       XK_s,                    spawndefault,   {0} },
 	{ MODKEY,                       XK_b,                    togglebar,      {0} },
 	{ MODKEY,                       XK_j,                    focusstack,     {.i = +1 } },
