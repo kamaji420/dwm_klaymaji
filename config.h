@@ -6,7 +6,7 @@
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const int startwithgaps	    = 1;	/* 1 means gaps are used by default */
-static const unsigned int gappx     = 10;       /* default gap between windows in pixels */
+static const unsigned int gappx     = 8;        /* default gap between windows in pixels */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -24,7 +24,7 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "", "", "", "󰊗", "󰄛", "", "󰗃", "󰵅", "󰎆" };
-static const char *defaulttagapps[] = { TERMINAL, BROWSER, "steam", "lutris", "NULL", "org.gimp.GIMP", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "sonixd", NULL }; 
+static const char *defaulttagapps[] = { "NULL", "NULL", "com.valvesoftware.Steam", "net.lutris.Lutris", "NULL", "org.gimp.GIMP", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "NULL", NULL }; 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
@@ -69,7 +69,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_pink, "-sb", col_purple, "-sf", col_gray1, "-i", "-p", dmenuprompt, NULL };
 static const char *termcmd [] = { TERMINAL, urxvtexec, "tmux", NULL };
 static const char *pmixer[] = { TERMINAL, urxvtexec, "pulsemixer", NULL };
-static const char *n3[] = { TERMINAL, urxvtexec, "nnn", "-aCDEHU", "-T", n3sort, NULL };
+static const char *n3[] = { TERMINAL, urxvtexec, "nnn", "-T", n3sort, NULL };
 static const char *webbrowser[] = { BROWSER, "~/Downloads/tenpo_files/tenpo.html", NULL };
 static const char *shotgun[] = { "shotgun-selection", NULL };
 static const char *up_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%",   NULL };
