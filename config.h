@@ -2,6 +2,7 @@
 
 /* constants */
 #define TERMINAL "urxvt"
+#define TERMOPS "-e"
 #define BROWSER "io.gitlab.librewolf-community"
 /* appearance */
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
@@ -24,15 +25,13 @@ static const char *colors[][3]      = {
 
 /* tagging */
 static const char *tags[] = { "", "", "", "󰊗", "󰄛", "", "󰗃", "󰵅", "󰎆" };
-static const char *defaulttagapps[] = { "NULL", "NULL", "com.valvesoftware.Steam", "net.lutris.Lutris", "NULL", "org.gimp.GIMP", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "NULL", NULL }; 
+static const char *defaulttagapps[] = { "NULL", BROWSER, "com.valvesoftware.Steam", "net.lutris.Lutris", "NULL", "org.gimp.GIMP", "io.freetubeapp.FreeTube", "dev.vencord.Vesktop", "NULL", NULL }; 
 static const Rule rules[] = {
 	/* xprop(1):
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -62,15 +61,13 @@ static const Layout layouts[] = {
 /* commands */
 
 static const char dmenuprompt[] = "klaymaji<3";
-static const char urxvtexec[] = "-e";
 static const char n3sort[] = "v";
 
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_pink, "-sb", col_purple, "-sf", col_gray1, "-i", "-p", dmenuprompt, NULL };
-static const char *termcmd [] = { TERMINAL, urxvtexec, "tmux", NULL };
-static const char *pmixer[] = { TERMINAL, urxvtexec, "pulsemixer", NULL };
-static const char *n3[] = { TERMINAL, urxvtexec, "nnn", "-T", n3sort, NULL };
-static const char *webbrowser[] = { BROWSER, "~/Downloads/tenpo_files/tenpo.html", NULL };
+static const char *termcmd [] = { TERMINAL, NULL };
+static const char *pmixer[] = { TERMINAL, TERMOPS, "pulsemixer", NULL };
+static const char *n3[] = { TERMINAL, TERMOPS, "nnn", "-T", n3sort, NULL };
 static const char *shotgun[] = { "shotgun-selection", NULL };
 static const char *up_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%",   NULL };
 static const char *down_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%",   NULL };
@@ -83,7 +80,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,                    spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_v,                    spawn,          {.v = pmixer } },
 	{ MODKEY,                       XK_e,                    spawn,          {.v = n3 } },
-	{ MODKEY,                       XK_w,                    spawn,          {.v = webbrowser } },
 	{ MODKEY,                       XK_p,                    spawn,          {.v = shotgun } },
 	{ MODKEY,                       XK_s,                    spawndefault,   {0} },
 	{ MODKEY,                       XK_b,                    togglebar,      {0} },
@@ -96,9 +92,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_space,                zoom,           {0} },
 	{ MODKEY,                       XK_Tab,                  view,           {0} },
 	{ MODKEY,                       XK_d,                    killclient,     {0} },
-	{ MODKEY|ControlMask,           XK_KP_Divide,            setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ControlMask,           XK_KP_Multiply,          setlayout,      {.v = &layouts[1]} },
-	{ MODKEY|ControlMask,           XK_KP_Subtract,          setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ControlMask,           XK_comma,                setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ControlMask,           XK_period,               setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ControlMask,           XK_slash,                setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_KP_Delete,            togglefloating, {0} },
 	{ MODKEY,                       XK_KP_Insert,            togglefullscr,  {0} },
 	{ MODKEY|ControlMask,           XK_KP_Delete,            view,           {.ui = ~0 } },
