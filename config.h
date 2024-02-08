@@ -32,6 +32,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
 };
 
 /* layout(s) */
@@ -68,7 +69,8 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd [] = { TERMINAL, NULL };
 static const char *pmixer[] = { TERMINAL, TERMOPS, "pulsemixer", NULL };
 static const char *n3[] = { TERMINAL, TERMOPS, "nnn", "-T", n3sort, NULL };
-static const char *shotgun[] = { "shotgun-selection", NULL };
+static const char *scrot[] = { "scrot", "-s", "-l", "width=2,color=#D9A2FB", "-f", NULL };
+static const char *clipmenu[] = { "clipmenu", NULL };
 static const char *up_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "+1%",   NULL };
 static const char *down_vol[] = { "pactl", "set-sink-volume", "@DEFAULT_SINK@", "-1%",   NULL };
 static const char *mute_vol[] = { "pactl", "set-sink-mute",   "@DEFAULT_SINK@", "toggle", NULL };
@@ -80,7 +82,8 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_t,                    spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_v,                    spawn,          {.v = pmixer } },
 	{ MODKEY,                       XK_e,                    spawn,          {.v = n3 } },
-	{ MODKEY,                       XK_p,                    spawn,          {.v = shotgun } },
+	{ MODKEY,                       XK_p,                    spawn,          {.v = scrot } },
+	{ MODKEY,                       XK_c,                    spawn,          {.v = clipmenu } },
 	{ MODKEY,                       XK_s,                    spawndefault,   {0} },
 	{ MODKEY,                       XK_b,                    togglebar,      {0} },
 	{ MODKEY,                       XK_j,                    focusstack,     {.i = +1 } },
